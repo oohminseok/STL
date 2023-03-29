@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
+#include <bitset>
 
 void TestPrint(std::string& str)
 {
@@ -75,5 +77,49 @@ int main()
 	number = std::stoi(str); //문자열을 정수로 변환
 
 	std::cout << str << "<->" << number << std::endl;
+	
+	
+	//문자열 스트림
+	int number{ 1 };
+	char name[]{ "Doggy" };
+	float average{ 90.1f };
+	char output[128]{};
+	std::ostringstream os; //문자를 화면에 출력하는 스트림
+	os << number << "번 학생" << name << "는 평균" << average << "입니다." << std::endl;
+	
+	std::string buffer = os.str();
+
+	//포멧 스트림
+	int myInt = 123;
+	float myFloat = 3.141592f;
+	bool myBool = true;
+	std::cout << myBool << std::endl; //1출력
+	std::cout << std::boolalpha << myBool << std::endl; //true출력
+	std::cout << std::dec << myInt << std::endl; //10진수 123
+	std::cout << std::hex << myInt << std::endl; //16진수 7b
+	std::cout << std::oct << myInt << std::endl; //8진수 173
+	std::cout << std::bitset<8>(myInt).to_string() << std::endl; //01111011
+	std::cout.precision(3); //정밀도 지정
+	std::cout << myFloat << std::endl; //3.14
+	std::cout.width(10); //너비 지정
+	std::cout << myInt << std::endl;//        173 
+	std::cout.fill('0'); //여백을 채울 문자 지정
+	std::cout.width(10);//너비 지정
+	std::cout << std::right << myInt << std::endl; //오른쪽 정렬
+
+	//벡터(vector)
+	//벡터를 사용하기 위해서는 #include <vector>명시
+
+	std::vector<int> v{ 2,3,1,5,6 }; 
+	std::vector<std::string> names{ "doggy","kitty","bunny","piggy" }; 
+
+	std::vector<int> n(5); //크기 지정
+	std::cout << v[0]; //v[0]의 값 2를 출력
+	v[1] = 9; //v[1]의 값에 9를 대입
+
+	for (int i = 0; i < v.size(); ++i)
+	{
+		std::cout << v[i] << std::endl; //출력
+	}
 }
 
