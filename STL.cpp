@@ -121,5 +121,81 @@ int main()
 	{
 		std::cout << v[i] << std::endl; //출력
 	}
+	
+	//c++범위기반 반복(rage-based loop)
+
+	for (int x : v)
+	{
+		std::cout << x << std::endl;
+	}
+
+	//vector의 크기 변경
+	v.push_back(4); //v[4]뒤에 4가 들어감 크기는 6
+	v.push_back(7); //v[5]뒤에 7이 들어감 크기는 7;
+
+	std::vector<int> vector{};
+	std::cout << "숫자를 공백으로 구분하여 입력하세요!" << std::endl;
+	std::cout << "입력 종료는 숫자가 아닌 문자를 입력하시면 됩니다." << std::endl;
+
+	for (int value; std::cin >> value;)
+	{
+		v.push_back(value);
+	}
+
+	int sum{};
+	for (int element : v)
+	{
+		sum += element;
+	}
+
+	float average = static_cast<float>(sum) / v.size();
+
+	std::cout << "합:" << sum << std::endl;
+	std::cout << "평균" << average << std::endl;
+
+	//주의!
+	std::vector<int> number1{ 3 }; //값이 3인 원소가 들어가 있음
+	std::vector<int> number2(3); //크기가 3이며 기본값이 0이 들어가 있음
+
+	//반복자
+	//반복자는 컨테이너를 순회하기 위한 포인터
+	std::vector<int> v2{ 1,2,3 };
+	std::vector<int>::iterator itr = v2.begin(); //itr이 v2의 첫번쨰 원소를 가르키고 있음
+
+	while (itr != v.end())
+	{
+		std::cout << *itr; //역참조 해서 출력
+		itr++; 
+	}
+
+	for (std::vector<int>::iterator itr2 = v2.begin(); itr2 != v.end(); ++itr2)
+	{
+		std::cout << *itr2;
+	}
+
+	for (auto itr3 = v.begin(); itr3 != v.end(); ++itr)
+	{
+		std::cout << *itr;
+	}
+
+	for (int& val : v2)
+	{
+		val = val * val; //참조형을 사용해 값을 변경
+	}
+
+
+	//람다식(c++11)
+	[](int a, int b) {}; //매개변수 2개를 받는 익명함수
+	[](int a)->int {return a; }; //매개변수 1개와 반환값이 있는 익명함수
+
+	//for each
+	//범위기반 반복문과 비슷한 기능, 헤더에 algorithm포함
+
+	std::vector<int> v4{ 1,2,3 };
+	std::for_each(v4.begin(), v4.end(), [](const int& val)
+		{
+			std::cout << val;
+		})
+	
 }
 
