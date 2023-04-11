@@ -3,6 +3,9 @@
 #include <string>
 #include <sstream>
 #include <bitset>
+#include <algorithm>
+#include <array>
+#include <forward_list>
 
 void TestPrint(std::string& str)
 {
