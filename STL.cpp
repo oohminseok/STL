@@ -195,7 +195,95 @@ int main()
 	std::for_each(v4.begin(), v4.end(), [](const int& val)
 		{
 			std::cout << val;
-		})
+		});
+
+	//STL 컨테이너 정리
+	//순차 컨테이너: array 배열
+	//             : vector 가변배열
+	//             : forward_list 단일 연결 리스트
+	//             : list 양방향 연결 리스트
+	//             : deque 양방향 큐
+	//원소들이 순서대로 나열되어 있는 컨테이너, 원소를 추가해도 순서유지
+
+	//보조 컨테이너: stack 스택
+	//             : queue 큐
+	//             : priority_queue 우선순위 적용된 큐
+	//특정한 목적에 맞도록 변형된 컨테이나 
 	
+	//연관 컨테이너: set 이진 탐색 트리 기반 단일 키
+	//             : multiset 여러개의 키를 가진 set
+	//             : map 이진 탐색 트리 기반(key,value)
+	//             : multimap 여러개의 키를 가진 map
+	//원소들이 좌/우 혹은 상/하로 서로 관련이 있는 컨테이너, 원소들끼리 부모자식의 관계를 가지기도 한다, 원소를 추가하면 정렬이 된다.
+
+	//오버헤더(overgead)
+	//간접비용, 기대하는 저장공간 외에 추가되는 값을 말한다.
+
+	//메모리 접근 방식
+	//임의 접근(random access):원소가 포함된 메모리를 상수 시간에 가져올 수 있다.
+	//순자 접근(sequential access):처음 혹은 끝 부터 순서대로 접근해서 원소를 가져온다.
+
+	//std::array
+	//#include<array>
+	//std::array의 특징
+	//1.순차적(Sequence)
+	//정해진 순서로 저장되며, 각 원소를 순서대로 접근 가능
+	//2.연속된 저장 공간(Contiguous)
+	//연속된 메모리에 저장되어 포인터로 이동이 가능,랜덤 액세스 가능
+	//3.고정크기
+	//array의 크기는 컴파일 시간 상수,일반 배열과 마찬가지로 정확히 원소 개수 만큼 메모리를 차지
+
+	std::array<int, 4>array{ 0,1,2,3 };
+
+	for (auto value : array) 
+	{
+		std::cout << value;
+	}
+
+	for (auto iter = array.begin(); iter != array.end(); ++iter)
+	{
+		*iter = *iter + 1;
+	}
+
+	for (int i = 0; i < array.size(); ++i)
+	{
+		std::cout << array[i] << " ";
+	}
+
+	//std::vector
+	//#inlcude<vector>
+	//1.순차적(Sequence)
+	//정해진 순서로 저장되며, 각 원소를 순서대로 접근 가능
+	//2.동적 배열(Dynamic Array)
+	//배열 크기를 변경할 수 있으며, 포인터 연산을 통해 바로 접근 가능
+	//3.메모리 할당자(Memory Allocator)
+	//할당자(allocator)를 통해 추가할 원소의 메모리 할당을 동적으로 처리 가능
+
+
+	//std::forward_list
+	//#inlcude<forward_list>
+	//1.순차적(Sequence)
+	//정해진 순서로 저장되며, 각 원소를 순서대로 접근 가능
+	//2.단일 연결 리스트(Single Linked List)
+	//특정 원소 이후에 상수 시간에 삽입/삭제 가능, 입의 접근 불가능
+	//3.메모리 할당자(Memory Allocator)
+	//할당자(allocator)를 통해 추가할 원소의 메모리 할당을 관리
+
+	std::forward_list<int> list{ 10,11,20,21 };
+	
+	auto it = std::find(list.begin(), list.end(), 11); //값을 찾아 반복자 반환
+	it =list.insert_after(it, 12); //반복자 뒤에 값을 삽입하고 반복자 반환
+
+	std::forward_list<int> list2{ 10,11 };
+	list.splice_after(it, list2); //list에 list2의 원소들을 붙이고 list2의 원소 모두 비워진다.
+	list.sort();//리스트 정렬
+
+	list.unique([](int a, int b)
+		{
+			return a == b; //중복되는 값을 제거한다.정렬이 되어야만 작동한다.
+		}); 
+
+	list.erase_after(list.begin()); //반복자 다음 원소를 지운다.
+		
 }
 
