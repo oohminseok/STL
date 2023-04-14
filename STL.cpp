@@ -6,6 +6,10 @@
 #include <algorithm>
 #include <array>
 #include <forward_list>
+#include <list>
+#include <deque>
+#include <stack>
+#include <queue>
 
 void TestPrint(std::string& str)
 {
@@ -287,6 +291,71 @@ int main()
 		}); 
 
 	list.erase_after(list.begin()); //반복자 다음 원소를 지운다.
+	
+	//std::list
+	//#include<list>
+	//1.순차적(Sequence)
+	//정해진 순서로 저장되며, 각 원소를 순서대로 접근 가능
+	//2.이중 연결 리스트(Dobule Linked List)
+	//특정 원소 이후에 상수 시간에 삽입/삭제 가능, 입의 접근 불가능
+	//3.메모리 할당자(Memory Allocator)
+	//할당자(allocator)를 통해 추가할 원소의 메모리 할당을 관리
+
+	std::list<int> list{ 1,2,3 };
+
+	list.reverse(); //원소 역순으로 나열 {3,2,1}
+
+	std::list<int> list2{ 4,5,6 };
+	
+	list2.merge(list); //list의 원소들을 list2로 옮겨 하나로 병합 단 둘다 정렬이 되어 있어야함
+
+	//std::deque
+	//#include<deque>
+	//1.순차적(Sequence)
+	//정해진 순서로 저장되며, 각 원소를 순서대로 접근 가능
+	//2.동적 배열(Dynamic Array)
+	//배열 크기 변경 가능하며, 포인터 연산을 통해 접근 가능
+	//3.메모리 할당자(Memory Allocator)
+	//할당자(allocator)를 통해 추가할 원소의 메모리 할당을 관리
+	//4.vector는 단일 배열을 사용하나 deque는 서로 다른 메모리 공간으로 분산될수 있다.
+
+	std::deque<int> deque{ 3,4,5 };
+	deque.push_front(1); //앞에 값을 추가
+	deque.push_back(6); //뒤에 값을 추가
+	deque.pop_front(); //앞에서 값을 꺼낸다.
+	deque.pop_back(); //뒤에서 값을 꺼낸다.
+
+	//std::stack
+	//#include<stack>
+
+	std::stack<int> stack;
+	stack.push(1); //뒤에 값을 추가
+	stack.push(2); //뒤에 값을 추가
+	stack.push(3); //뒤에 값을 추가
+	stack.pop(); //뒤에 값을 꺼낸다.
+
+	std::stack<int> tempStack(stack); //순회가 불가하므로 객체를 하나 새로 만들어서 원래의 스택에 들어있는 값들을 복사생성자 동적이므로 깊은복사를 통해 넣어준다.
+	while (!tempStack.empty()) //값을 비울때까지 반복
+	{
+		std::cout << tempStack.top() << " "; //출력
+		tempStack.pop(); //값을 꺼낸다.
+	}
+	
+	//std::queue
+	//#include<queue>
+
+	std::queue<int> queue;
+	queue.push(1); //값을 추가
+	queue.push(2); 
+	queue.push(3);
+	queue.pop();
+
+	std::queue<int> tempQueue(queue); //복
+	while (!tempQueue.empty())
+	{
+		std::cout << tempQueue.front() << " ";
+		tempQueue.pop();
+	}
 		
 }
 
