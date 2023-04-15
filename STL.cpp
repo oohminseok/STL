@@ -10,6 +10,8 @@
 #include <deque>
 #include <stack>
 #include <queue>
+#include <set>
+#include <map>
 
 void TestPrint(std::string& str)
 {
@@ -350,11 +352,65 @@ int main()
 	queue.push(3);
 	queue.pop();
 
-	std::queue<int> tempQueue(queue); //복
+	std::queue<int> tempQueue(queue); 
 	while (!tempQueue.empty())
 	{
 		std::cout << tempQueue.front() << " ";
 		tempQueue.pop();
+	}
+	
+	//std::set->이진 탐색 트리(binary search tree)
+	//#include<set>
+	//1.연관적(associative)
+	//순서나 위치에 의해 원소를 참조하는 것이 아니라, 키(key)로 참조
+	//2.순서 집합(ordered)
+	//원소가 추가될때 지정된 비교함수에 의해 정렬된다.
+	//3.고유성(unique)
+	//동일한 키는 존재하지 않는다.
+	//4.메모리 할당자(Memory Allocator)
+	//할당자(allocator)를 통해 추가할 원소의 메모리 할당을 관리
+
+	std::set<int> set;
+	set.insert(1);
+	set.insert(6);
+	set.insert(2);
+	set.insert(5); //자동으로 정렬된다 {1,2,5,6}
+
+	set.erase(2); //원소제거 {1,5,6}
+
+	std::set<int>::iterator setIter = set.begin(); //반복자를 통한 순회가능
+	while (setIter != set.end())
+	{
+		std::cout << *setIter << " ";
+		setIter++;
+	}
+
+	//std::map
+	//#include<map>
+	//map은 <key,value>으로 구성된 원소를 가진다.
+	//key 식별자, value 실제 원소의 값
+	//1.연관적(associative)
+	//순서나 위치에 의해 원소를 참조하는 것이 아니라, 키(key)로 참조
+	//2.순서 집합(ordered)
+	//원소가 추가될때 지정된 비교함수에 의해 정렬된다.
+	//3.고유성(unique)
+	//동일한 키는 존재하지 않는다.
+	//4.메모리 할당자(Memory Allocator)
+	//할당자(allocator)를 통해 추가할 원소의 메모리 할당을 관리
+
+	std::map<std::string, std::string> myDictionary;
+
+	myDictionary.insert(std::pair<std::string, std::string>("array", "단순 배열"));
+
+	myDictionary.insert(std::pair<std::string, std::string>("vector", "동적 배열"));
+
+	myDictionary.insert(std::pair<std::string, std::string>("stack", "LIFO 구조"));
+
+	std::cout << "array" << myDictionary["array"] << std::endl;
+
+	for (auto pair : myDictionary)
+	{
+		std::cout << pair.first << ":" << pair.second << std::endl;
 	}
 		
 }
